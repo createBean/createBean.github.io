@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/10/第一篇Hexo文章/">第一篇Hexo文章</a>
+      <a class="article-title" href="/2017/11/10/第一篇Hexo文章/">快速搭建HEXO博客</a>
     </h1>
   
 
@@ -83,12 +83,58 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>你好，欢迎来到斌哥技术博客</p>
+        <pre><code>突发奇想，建个博客记录下爬过的坑。于是各种找资料，踩过各种坑，终于使用 hexo 搭建个人博客初步完成了，域名目前用得时 github 的,我的 hexo 是 3.4.0 版本，hexo 不同的版本，很多配置都不一样。
+</code></pre><p><strong>正文：</strong><br>　这边教程是针对与Mac的，Window的小伙伴们也可以参考参考哦。</p>
+<ul>
+<li>配置环境</li>
+</ul>
+<blockquote>
+<p>安装Node：<br>作用：用来生成静态页面的 到Node.js官网下载相应平台的最新版本，一路安装即可。</p>
+<p>安装Git：<br>作用：把本地的hexo内容提交到github上去. 安装Xcode就自带有Git，我就不多说了。</p>
+<p>注册GitHub：<br>作用：是用来做博客的远程创库、域名、服务器之类的，怎么与本地hexo建立连接等下讲。 github账号我也不再啰嗦了,没有的话直接申请就行了，跟一般的注册账号差不多，SSH Keys，看你自己了，可以不配制，不配置的话以后每次对自己的博客有改动提交的时候就要手动输入账号密码，配置了就不需要了，怎么配置我就不多说了，网上有很多教程。</p>
+</blockquote>
+<ul>
+<li>正式安装HEXO</li>
+</ul>
+<blockquote>
+<p>Node和Git都安装好后，可执行如下命令安装hexo：<br>$ sudo npm install -g hexo</p>
+<p>初始化：<br>创建一个文件夹，如：Blog，cd到Blog里执行hexo init的。命令：<br>$ hexo init</p>
+<p>生成静态页面:<br>继续再Blog目录下执行如下命令，生成静态页面<br>$ hexo generate （hexo g  也可以)</p>
+<p>本地启动:<br>启动本地服务，进行文章预览调试，命令:<br>$ hexo server   </p>
+</blockquote>
+<ul>
+<li>浏览器输入<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></li>
+</ul>
+<blockquote>
+<p>如果配置成功的话，是能够看到本地HelloWorld的页面</p>
+</blockquote>
+<ul>
+<li>配置Github</li>
+</ul>
+<blockquote>
+<p>建立Repository：<br>建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io】，固定写法 然后建立关联。</p>
+<p>现在我们需要_config.yml文件，来建立关联：<br>打开文件，拖动到最下面，修改：（: 后面要有空格）<br>deploy:<br>  type: git<br>  repository: <a href="https://github.com/leopardpan/leopardpan.github.io.git" target="_blank" rel="external">https://github.com/leopardpan/leopardpan.github.io.git</a><br>  branch: master</p>
+<p>执行如下命令才能使用git部署:<br>$ npm install hexo-deployer-git –save</p>
+<p>$ hexo deploy</p>
+</blockquote>
+<p>然后再浏览器中输入<a href="https://createbean.github.io/就行了，我的" target="_blank" rel="external">https://createbean.github.io/就行了，我的</a> github 的账户叫 createbean ,把这个改成你 github 的账户名就行了</p>
+<ul>
+<li>部署步骤<ol>
+<li>hexo clean</li>
+<li>hexo generate</li>
+<li>hexo deploy</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>一些常用命令：<br> 1.hexo new “postName” #新建文章<br> 2.hexo new page “pageName” #新建页面<br> 3.hexo generate #生成静态页面至public目录<br> 4.hexo server #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）<br> 5.hexo deploy #将.deploy目录部署到GitHub<br> 6.hexo help  #查看帮助<br> 7.hexo version  #查看Hexo的版本</li>
+</ul>
+<p>　</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/10/第一篇Hexo文章/" data-id="cj9takcca0000wxlafgah8g1h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/10/第一篇Hexo文章/" data-id="cj9tbzuz700013klairz2ve6t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -133,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/10/hello-world/" data-id="cj9takcce0001wxlana9va75z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/10/hello-world/" data-id="cj9tbzuyr00003klagleossai" class="article-share-link">Share</a>
       
       
     </footer>
@@ -173,7 +219,7 @@
       <ul>
         
           <li>
-            <a href="/2017/11/10/第一篇Hexo文章/">第一篇Hexo文章</a>
+            <a href="/2017/11/10/第一篇Hexo文章/">快速搭建HEXO博客</a>
           </li>
         
           <li>

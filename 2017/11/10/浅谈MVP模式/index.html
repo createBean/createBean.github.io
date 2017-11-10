@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MVP设计模式应该这样掌握 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言：在学习MVP设计模式时，我们所读的大部分文章都是首先介绍什么是MVP以及MVP与MVC设计模式的不同，这些文章都讲的很好，但是这些理论的东西不但容易忘记，而且对于那些都没有接触过MVC设计模式的人来说可能还有点难以理解。这篇文章理论知识很少，重点是让你能将MVP设计模式用到自己的开发中。  注： 阅读本文一定要自己动手写代码！自己敲一遍代码感受一下MVP设计模式。 MVP的简单介绍还是要讲点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MVP设计模式应该这样掌握">
+<meta property="og:url" content="http://yoursite.com/2017/11/10/浅谈MVP模式/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言：在学习MVP设计模式时，我们所读的大部分文章都是首先介绍什么是MVP以及MVP与MVC设计模式的不同，这些文章都讲的很好，但是这些理论的东西不但容易忘记，而且对于那些都没有接触过MVC设计模式的人来说可能还有点难以理解。这篇文章理论知识很少，重点是让你能将MVP设计模式用到自己的开发中。  注： 阅读本文一定要自己动手写代码！自己敲一遍代码感受一下MVP设计模式。 MVP的简单介绍还是要讲点">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3794407-addeb8ffc916368f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-11-10T10:09:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MVP设计模式应该这样掌握">
+<meta name="twitter:description" content="前言：在学习MVP设计模式时，我们所读的大部分文章都是首先介绍什么是MVP以及MVP与MVC设计模式的不同，这些文章都讲的很好，但是这些理论的东西不但容易忘记，而且对于那些都没有接触过MVC设计模式的人来说可能还有点难以理解。这篇文章理论知识很少，重点是让你能将MVP设计模式用到自己的开发中。  注： 阅读本文一定要自己动手写代码！自己敲一遍代码感受一下MVP设计模式。 MVP的简单介绍还是要讲点">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3794407-addeb8ffc916368f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-浅谈MVP模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/10/浅谈MVP模式/" class="article-date">
+  <time datetime="2017-11-10T10:09:14.000Z" itemprop="datePublished">2017-11-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MVP设计模式应该这样掌握
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前言：在学习MVP设计模式时，我们所读的大部分文章都是首先介绍什么是MVP以及MVP与MVC设计模式的不同，这些文章都讲的很好，但是这些理论的东西不但容易忘记，而且对于那些都没有接触过MVC设计模式的人来说可能还有点难以理解。这篇文章理论知识很少，重点是让你能将MVP设计模式用到自己的开发中。 </p>
+<p>注： 阅读本文一定要自己动手写代码！自己敲一遍代码感受一下MVP设计模式。</p>
+<h3 id="MVP的简单介绍"><a href="#MVP的简单介绍" class="headerlink" title="MVP的简单介绍"></a>MVP的简单介绍</h3><p>还是要讲点理论！MVP分别是Mode、View和Presenter，翻译过来就是数据、视图和主持者，行！就先知道这么多，下面动手写代码。</p>
+<h3 id="MVP设计模式初体验"><a href="#MVP设计模式初体验" class="headerlink" title="MVP设计模式初体验"></a>MVP设计模式初体验</h3><p>这里用一个List来代表数据层，Activity就是视图层，AddPresenter来作为主持者，下面编写代码。</p>
+<h4 id="设计数据层"><a href="#设计数据层" class="headerlink" title="设计数据层"></a>设计数据层</h4><p>首先定义一个名为StudentDataSource的接口，为了能更容易的理解MVP设计模式，这里就只有一个添加数据的方法，如下:</p>
+<p><pre class="”brush:" java;="" gutter:="" true;”=""><br>public interface StudentDataSource {<br>    void addStudent(Student student);<br>}<br></pre><br>接着写一个名为StudentRepository的类实现StudentDataSource接口，如下:</p>
+<p><pre class="”brush:" java;="" gutter:="" true;”=""><br>public class StudentRepository implements StudentDataSource{<br>    private List<student> mStudents = new ArrayList&lt;&gt;();<br>    @Override<br>    public void addStudent(Student student) {<br>        mStudents.add(student);<br>    }<br>}<br></student></pre><br>ok，这样就写好了数据层即Mode，简单吧！下面就分别来实现视图层和主持者。</p>
+<h4 id="设计视图层和主持者"><a href="#设计视图层和主持者" class="headerlink" title="设计视图层和主持者"></a>设计视图层和主持者</h4><p>同样，先写一个BasePresenter接口和BaseView接口分别作为主持者和视图层的基类，如下:</p>
+<p><pre class="”brush:" java;="" gutter:="" true;”=""><br>public interface BasePresenter {<br>}<br></pre></p>
+<p><pre class="”brush:" java;="" gutter:="" true;”=""><br>public interface BaseView<t> {<br>    void setPresenter(T presenter);<br>}<br></t></pre><br>下面将视图层和主持者层都放进一个AddStudentContract契约类里，如下:</p>
+<p><pre class="”brush:" java;="" gutter:="" true;”=""><br>public interface AddStudentContract {<br>    interface Presenter extends BasePresenter {<br>        void saveStudent();<br>    }<br>    interface View extends BaseView<presenter> {<br>        void showSaveSuccess();<br>    }<br>}<br></presenter></pre><br>这样做的好处是可以统一管理View层和Presenter层，这样就将接口设计好了，先面开始写实现类。先看Presenter层的实现类AddStudentPresenter,如下:</p>
+<p><pre class="”brush:" java;="" gutter:="" true;”=""><br>public class AddStudentPresenter implements AddStudentContract.Presenter {<br>    private AddStudentContract.View mAddStudentView;<br>    private StudentDataSource addStudentRepository;<br>    public AddStudentPresenter(AddStudentContract.View view) {<br>        mAddStudentView = view;<br>        addStudentRepository = new StudentRepository();<br>    }<br>    @Override<br>    public void saveStudent() {<br>        Student student = new Student();<br>        student.setAge(20);<br>        student.setName(“wizardev”);<br>        addStudentRepository.addStudent(student);<br>        mAddStudentView.showSaveSuccess();<br>    }<br>}<br></pre><br>再看View层的实现，这里View层的实现就是Activity，代码如下:</p>
+<p><pre class="”brush:" java;="" gutter:="" true;”=""><br>public class AddStudentActivity extends AppCompatActivity implements AddStudentContract.View {<br>    private AddStudentContract.Presenter mPresenter;<br>    private Button mAddStudent;<br>    @Override<br>    protected void onCreate(Bundle savedInstanceState) {<br>        super.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>        setPresenter(new AddStudentPresenter(this));<br>        mAddStudent = findViewById(R.id.addStudent);<br>        mAddStudent.setOnClickListener(new View.OnClickListener() {<br>            @Override<br>            public void onClick(View v) {<br>                mPresenter.saveStudent();<br>            }<br>        });<br>    }<br>    @Override<br>    public void setPresenter(AddStudentContract.Presenter presenter) {<br>        if (presenter != null) {<br>            mPresenter = presenter;<br>        }<br>    }<br>    @Override<br>    public void showSaveSuccess() {<br>        Toast.makeText(this,”添加成功！”,Toast.LENGTH_SHORT).show();<br>    }<br>}<br></pre><br>好了，上面即使MVP的设计模式的使用，到了这里先停下来，先自己把上面的代码写一遍，体会一下，然后再继续阅读。</p>
+<h3 id="MVP设计模式的总结"><a href="#MVP设计模式的总结" class="headerlink" title="MVP设计模式的总结"></a>MVP设计模式的总结</h3><p>通过自己动手编写代码，相信你已经对MVP设计模式有了一定的了解，下面看下MVP设计模式的结构图:<br><img src="http://upload-images.jianshu.io/upload_images/3794407-addeb8ffc916368f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>通过这幅图和我们自己写的代码，我们会发现Presenter层是Mode层和View层通讯的桥梁，同时也将View层和Mode层隔离开来，使它们不能直接的进行通讯，同过这种方法达到了解耦合的目的。 </p>
+<p>通过编写代码，会发现AddStudentPresenter同时持有Mode层和View层的引用，这样就能在需要数据改变或视图显示时直接改变数据或者视图的显示状态。同样View层持有Presenter层的引用，这样就能将一些处理事件的逻辑放在Presenter层中进行处理，处理完成后通知View层改变显示状态。 </p>
+<p>Mode层呢，Mode层不止是实体类还有数据的增删改查，Mode层只做与数据相关的操作。 </p>
+<p>虽然MVP设计模式使代码增加不少，包结构也变得复杂，但是他使数据和视图高度解偶，让代码变的更加清晰，更易于维护，同时也方便对各个模块进行单独的测试。</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>文章采用先动手写代码后理论的模式，是为了能让大家更好的理解MVP设计模式，可以直接在项目中进行使用，缩短掌握MVP设计模式所需的时间。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/10/浅谈MVP模式/" data-id="cj9trifg50002rplayft8jdgj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/10/搭建个人HEXO/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">快速搭建HEXO博客</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/10/浅谈MVP模式/">MVP设计模式应该这样掌握</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/10/搭建个人HEXO/">快速搭建HEXO博客</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/10/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

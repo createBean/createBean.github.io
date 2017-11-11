@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="FlowUp这是一个帮助你跟踪app整体性能的工具，深入分析关键的性能数据如FPS, 内存, CPU, 磁盘, 等等。FlowUp根据用户数量收费。    Stetho由Facebook开发的一个强大的开源Android debug平台，Stetho让原生 Android app的debug跟使用Chrome的开发者工具debug web页面一样简单。它能让你轻松检查整个view树结构，观察SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="靠谱的Android开发者工具">
+<meta property="og:url" content="http://yoursite.com/2017/11/11/好用的Android开发者工具/index.html">
+<meta property="og:site_name" content="Blog For Bean">
+<meta property="og:description" content="FlowUp这是一个帮助你跟踪app整体性能的工具，深入分析关键的性能数据如FPS, 内存, CPU, 磁盘, 等等。FlowUp根据用户数量收费。    Stetho由Facebook开发的一个强大的开源Android debug平台，Stetho让原生 Android app的debug跟使用Chrome的开发者工具debug web页面一样简单。它能让你轻松检查整个view树结构，观察SQL">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW03Xa4ibQG1iayksJDAYzYmPKfWzUhTuBftKwoBXmdY5olV6Wv6icRROEDgw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW0329GBCDvzW4bFrEW1yTel5GZj4VtQdNkrfAVRy27TibpgvoLia02FaSRQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW03mMw3TGwMqbsSTw62xyLkrdufbZgrghkqczRkuXoYeVoxuIKmGibzatw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW03unneKCjkCRQHf96vKYTqYskpVWicQpXNMr9qwPP5f5qagowQEuspQkw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW03zwufg1k8ZbZXZy8s3YtibibaRLFsJpooQp3TRVb6ticCduiceJ7HI0XoqQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW03A13Erc2rLn2OzD2ibMyiavuVEGSRNwvHFLYdAnicKNR6tnLiaoJQRXSbCQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWic1eqic4icQCGjmhiamyQqic02yVesvnj4ibiby4HwXkzNPnHTic0h9tOm8W0w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWyshafb7pib4w68dryX8sQsOrtxpJIwia5xvoofPyaCibJ5J90qqXNb8GA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWhk9nZZiaQjLrVD33bLEMiaqVqN7NbHcHEeLficmyaAKtsmF42wjiauUBsw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWut1Oo493uicEPDjK4BiazBib786xMl2kYWNzLtWqlr3jOicUibJEn8muWug/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWxde8GKKe7Op8PyicFH7fohLCs4XEzcUgzkibgvDlf1fNSKmvbH1M4Zmg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWXx33UzU1pbLRgTzwq55eRic8wKDe0Wu208pmnMHdb9CxD2yXkoysgaQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:updated_time" content="2017-11-11T03:42:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="靠谱的Android开发者工具">
+<meta name="twitter:description" content="FlowUp这是一个帮助你跟踪app整体性能的工具，深入分析关键的性能数据如FPS, 内存, CPU, 磁盘, 等等。FlowUp根据用户数量收费。    Stetho由Facebook开发的一个强大的开源Android debug平台，Stetho让原生 Android app的debug跟使用Chrome的开发者工具debug web页面一样简单。它能让你轻松检查整个view树结构，观察SQL">
+<meta name="twitter:image" content="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW03Xa4ibQG1iayksJDAYzYmPKfWzUhTuBftKwoBXmdY5olV6Wv6icRROEDgw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/11/好用的Android开发者工具/"/>
+
+
+
+
+
+  <title>靠谱的Android开发者工具 | Blog For Bean</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Blog For Bean</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/11/好用的Android开发者工具/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bob Stones">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog For Bean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">靠谱的Android开发者工具</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-11T11:42:05+08:00">
+                2017-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="FlowUp"><a href="#FlowUp" class="headerlink" title="FlowUp"></a><a href="https://flowup.io/" target="_blank" rel="external">FlowUp</a></h2><p>这是一个帮助你跟踪app整体性能的工具，深入分析关键的性能数据如FPS, 内存, CPU, 磁盘, 等等。FlowUp根据用户数量收费。 </p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW03Xa4ibQG1iayksJDAYzYmPKfWzUhTuBftKwoBXmdY5olV6Wv6icRROEDgw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"> </p>
+<h2 id="Stetho"><a href="#Stetho" class="headerlink" title="Stetho"></a><a href="https://github.com/facebook/stetho" target="_blank" rel="external">Stetho</a></h2><p>由Facebook开发的一个强大的开源Android debug平台，Stetho让原生 Android app的debug跟使用Chrome的开发者工具debug web页面一样简单。它能让你轻松检查整个view树结构，观察SQLite数据库，管理网络操作以及其它的一些操作。  </p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW0329GBCDvzW4bFrEW1yTel5GZj4VtQdNkrfAVRy27TibpgvoLia02FaSRQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"></p>
+<h2 id="JRebel-for-Android"><a href="#JRebel-for-Android" class="headerlink" title="JRebel for Android"></a><a href="https://zeroturnaround.com/software/jrebel-for-android/" target="_blank" rel="external">JRebel for Android</a></h2><p>每当等待永远也编译不出来的Gradle的时候，我们都会疯掉。JRebel的这个工具可以显著的提高编译速度。价格取决于开发者数量以及协议时长。  </p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW03mMw3TGwMqbsSTw62xyLkrdufbZgrghkqczRkuXoYeVoxuIKmGibzatw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"></p>
+<h2 id="Gradle-Please"><a href="#Gradle-Please" class="headerlink" title="Gradle Please"></a><a href="http://gradleplease.appspot.com/" target="_blank" rel="external">Gradle Please</a></h2><p>如果你的 Android Studio 编译系统使用的是Gradle，那么用一行代码就可以把第三方库添加到项目中了。但是如何才能快速的得到依赖的那行代码呢？这就是这个网站的方便之处了，它可以帮助你快速找到自己想要的库的依赖。 </p>
+<p>注：比如我们要使用glide，只需在一个输入框中输入glide，下面就会显示glide的完整依赖。有时候搞不清楚拼写或者版本号这些细节的话很有用。  </p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW03unneKCjkCRQHf96vKYTqYskpVWicQpXNMr9qwPP5f5qagowQEuspQkw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"></p>
+<h2 id="Android-Asset-Studio"><a href="#Android-Asset-Studio" class="headerlink" title="Android Asset Studio"></a><a href="https://romannurik.github.io/AndroidAssetStudio/" target="_blank" rel="external">Android Asset Studio</a></h2><p>一个可以生成各种类型图标（launcher, notification, generic, app shortcut icons）的工具集合。<br><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW03zwufg1k8ZbZXZy8s3YtibibaRLFsJpooQp3TRVb6ticCduiceJ7HI0XoqQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"></p>
+<h2 id="LeakCanary"><a href="#LeakCanary" class="headerlink" title="LeakCanary"></a><a href="https://github.com/square/leakcanary/" target="_blank" rel="external">LeakCanary</a></h2><p>LeakCanary是由Square开发的一个开源工具，让复杂的内存泄漏检测变得更简单。它可以在内存泄漏的时候显示通知，并提供一个完整的泄漏轨迹。<br><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqkicee1I1mKw4VLpe1gCxW03A13Erc2rLn2OzD2ibMyiavuVEGSRNwvHFLYdAnicKNR6tnLiaoJQRXSbCQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"></p>
+<h2 id="FindBugs"><a href="#FindBugs" class="headerlink" title="FindBugs"></a><a href="https://plugins.jetbrains.com/plugin/3847-findbugs-idea/" target="_blank" rel="external">FindBugs</a></h2><p>一个免费的 Android Studio插件，可以在开发早期检测出常见的Java bug。“我们通常都会在APP上线之后,发现各种错误,尤其是空指针异常,这些错误对于用户体验来说是非常不好的,但其实大部分的问题,我们都能够提前发现。在编写代码的过程中,可能不会时时刻刻记得检查空的引用,还有删除没有用过的变量,在我们自己测试的过程中可能难以发现问题,一旦app上线,用户的使用环境改变,这些潜在的问题就可能会冒出来”<br><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWic1eqic4icQCGjmhiamyQqic02yVesvnj4ibiby4HwXkzNPnHTic0h9tOm8W0w/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"></p>
+<h2 id="BlockCanary"><a href="#BlockCanary" class="headerlink" title="BlockCanary"></a><a href="https://github.com/markzhai/AndroidPerformanceMonitor" target="_blank" rel="external">BlockCanary</a></h2><p>另一个强大的性能监测库，BlockCanary是一个帮助你找出Android App界面卡顿元凶 的开源工具。设置非常简单，类似于LeakCanary。  </p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWyshafb7pib4w68dryX8sQsOrtxpJIwia5xvoofPyaCibJ5J90qqXNb8GA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"></p>
+<h2 id="APK-DeGuard"><a href="#APK-DeGuard" class="headerlink" title="APK DeGuard"></a><a href="http://apk-deguard.com/" target="_blank" rel="external">APK DeGuard</a></h2><p>这是我用过的最准确的反编译工具。它使用机器学习来分析各种app，确保每次都能输出最佳的结果。当我想知道一些app是如何实现某种功能的时候这个工具给了我很大帮助。<br><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWhk9nZZiaQjLrVD33bLEMiaqVqN7NbHcHEeLficmyaAKtsmF42wjiauUBsw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"></p>
+<h2 id="华为MobileTest"><a href="#华为MobileTest" class="headerlink" title="华为MobileTest"></a><a href="http://www.huaweicloud.com/product/mobiletest.html" target="_blank" rel="external">华为MobileTest</a></h2><p>华为MobileTest提供Android APK兼容性自动化遍历测试，基于自动化真机测试，帮助开发者发现缺陷并定位问题。 </p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWut1Oo493uicEPDjK4BiazBib786xMl2kYWNzLtWqlr3jOicUibJEn8muWug/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"></p>
+<h2 id="ClassyShark"><a href="#ClassyShark" class="headerlink" title="ClassyShark"></a><a href="https://github.com/google/android-classyshark" target="_blank" rel="external">ClassyShark</a></h2><p>ClassyShark可以帮助你窥探任何apk获得许多有用的信息，比如 classes, resources, manifest, dependencies, dex count等等。它可以让你了解一个app时做什么的甚至是如何做到的。ClassyShark是开源的。  </p>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWxde8GKKe7Op8PyicFH7fohLCs4XEzcUgzkibgvDlf1fNSKmvbH1M4Zmg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"></p>
+<h2 id="JSONSchema2POJO"><a href="#JSONSchema2POJO" class="headerlink" title="JSONSchema2POJO"></a><a href="http://www.jsonschema2pojo.org/" target="_blank" rel="external">JSONSchema2POJO</a></h2><p>一个把json文件转换成你java类的在线工具。有多种自定义选项，非常好用。<br><img src="http://mmbiz.qpic.cn/mmbiz_png/y5HvXaQmpqnWoMNRplLomBRdKkAWWfGWXx33UzU1pbLRgTzwq55eRic8wKDe0Wu208pmnMHdb9CxD2yXkoysgaQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="image"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/11/Android应用优化/" rel="next" title="Android应用优化">
+                <i class="fa fa-chevron-left"></i> Android应用优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Bob Stones</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FlowUp"><span class="nav-number">1.</span> <span class="nav-text">FlowUp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stetho"><span class="nav-number">2.</span> <span class="nav-text">Stetho</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JRebel-for-Android"><span class="nav-number">3.</span> <span class="nav-text">JRebel for Android</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle-Please"><span class="nav-number">4.</span> <span class="nav-text">Gradle Please</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Asset-Studio"><span class="nav-number">5.</span> <span class="nav-text">Android Asset Studio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakCanary"><span class="nav-number">6.</span> <span class="nav-text">LeakCanary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FindBugs"><span class="nav-number">7.</span> <span class="nav-text">FindBugs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BlockCanary"><span class="nav-number">8.</span> <span class="nav-text">BlockCanary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#APK-DeGuard"><span class="nav-number">9.</span> <span class="nav-text">APK DeGuard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#华为MobileTest"><span class="nav-number">10.</span> <span class="nav-text">华为MobileTest</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ClassyShark"><span class="nav-number">11.</span> <span class="nav-text">ClassyShark</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSONSchema2POJO"><span class="nav-number">12.</span> <span class="nav-text">JSONSchema2POJO</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bob Stones</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  Access volume:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

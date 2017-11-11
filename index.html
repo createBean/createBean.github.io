@@ -228,6 +228,322 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/11/ButterKnife使用及其背后的代码 /">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bob Stones">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog For Bean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/11/ButterKnife使用及其背后的代码 /" itemprop="url">Butterknife使用及其背后的代码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-11T16:55:00+08:00">
+                2017-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本篇博文主要介绍Butterknife使用及其背后的技术点，行文结构如下<br><img src="https://i.imgur.com/3igYD41.png" alt="image">   </p>
+<h2 id="简要"><a href="#简要" class="headerlink" title="简要"></a>简要</h2><p>Field and method binding for Android views which uses annotation processing to generate boilerplate code for you.<br>用注解处理器为程序在编译期生成一些样板代码，用于把一些属性字段和回调方法绑定到 Android 的 View,即专门为Android View设计的绑定注解，专业解决各种findViewById。  </p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p>在Library中使用 </p>
+<pre><code>dependencies {
+    compile &apos;com.jakewharton:butterknife:8.8.1&apos;
+    annotationProcessor &apos;com.jakewharton:butterknife-compiler:8.8.1&apos;
+}
+</code></pre><p>首先需要 在项目buildscript中增加 </p>
+<pre><code>buildscript {
+      repositories {
+        mavenCentral()
+       }
+      dependencies {
+        classpath &apos;com.jakewharton:butterknife-gradle-plugin:8.8.1&apos;
+      }
+} 
+</code></pre><p>然后在moudle中 </p>
+<pre><code>apply plugin: &apos;com.android.library&apos;
+apply plugin: &apos;com.jakewharton.butterknife&apos;  
+</code></pre><p>BindView  </p>
+<pre><code>class ExampleActivity extends Activity {
+      @BindView(R2.id.user) EditText username;
+      @BindView(R2.id.pass) EditText password;
+    ...
+}
+</code></pre><h2 id="常规使用"><a href="#常规使用" class="headerlink" title="常规使用"></a>常规使用</h2><ul>
+<li><p>Actvity中 </p>
+<p>  对一个成员变量使用@BindView注解，并传入一个View ID， ButterKnife 就能够帮你找到对应的View，并自动的进行转换（将View转换为特定的子类）： </p>
+</li>
+<li><p>资源绑定 </p>
+<p>  绑定资源到类成员上可以使用@BindBool、@BindColor、@BindDimen、@BindDrawable、@BindInt、@BindString。使用时对应的注解需要传入对应的id资源，例如@BindString你需要传入R.string.id_string的字符串的资源id。</p>
+</li>
+<li><p>布局绑定 </p>
+<p>  Butter Knife提供了bind的几个重载，只要传入跟布局，便可以在任何对象中使用注解绑定，通常使用在fragment和adapter</p>
+</li>
+<li><p>Fragment中</p>
+<pre class="”brush:" java;="" gutter:="" true;”="">
+public class FancyFragment extends Fragment { 
+  @BindView(R.id.button1)
+  Button button1;
+  @BindView(R.id.button2)
+  Button button2;
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+      View view = inflater.inflate(R.layout.fancy_fragment, container, false);
+      ButterKnife.bind(this, view); // TODO Use fields... return view; } }
+}
+</pre></li>
+<li>Adapter中<pre class="”brush:" java;="" gutter:="" true;”="">
+public class MyAdapter extends BaseAdapter {
+  @Override
+  public View getView(int position, View view, ViewGroup parent) {
+      ViewHolder holder;
+      if (view != null) {
+          holder = (ViewHolder) view.getTag();
+      } else {
+          view = inflater.inflate(R.layout.whatever, parent, false);
+          holder = new ViewHolder(view);
+          view.setTag(holder);
+      }
+      holder.name.setText("John Doe"); // etc... return view; } static class ViewHolder { @BindView(R.id.title) TextView name; @BindView(R.id.job_title) TextView jobTitle; public ViewHolder(View view) {
+          ButterKnife.bind(this, view);
+      }
+  }
+}
+</pre> </li>
+<li><p>监听器绑定 </p>
+<p>  监听器能够自动的绑定到特定的执行方法上：</p>
+<pre class="”brush:" java;="" gutter:="" true;”="">
+//单个绑定
+@OnClick(R.id.submit)
+public void submit(View view) {
+// TODO submit data to server...
+}
+//多个绑定
+@OnClick({R.id.btnJumpToLib, R.id.btnOne, R.id.btnTwo})
+void responseClick(View view) {
+  switch (view.getId()) {
+      case R.id.btnJumpToLib:
+          jumpToLib();
+          break;
+      case R.id.btnOne:
+          Toast.makeText(this, "click btnOne", Toast.LENGTH_SHORT).show();
+          break;
+      case R.id.btnTwo:
+          Toast.makeText(this, "click btnTwo", Toast.LENGTH_SHORT).show();
+          break;
+      default:
+          break;
+  }
+}
+</pre></li>
+<li><p>重置绑定 </p>
+<p>  Fragment的生命周期与Activity不同。在Fragment中，如果你在onCreateView中使用绑定，那么你需要在onDestroyView中设置所有view为null。为此，ButterKnife返回一个Unbinder实例以便于你进行这项处理。在合适的生命周期回调中调用unbind函数就可完成重置。</p>
+<pre class="”brush:" java;="" gutter:="" true;”="">
+public class FancyFragment extends Fragment {
+  @BindView(R.id.button1)
+  Button button1;
+  @BindView(R.id.button2)
+  Button button2;
+  private Unbinder unbinder;
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+      View view = inflater.inflate(R.layout.fancy_fragment, container, false);
+      unbinder = ButterKnife.bind(this, view); // TODO Use fields...
+      return view;
+  }
+  @Override
+  public void onDestroyView() {
+      super.onDestroyView();
+      unbinder.unbind();
+  }
+}
+</pre></li>
+<li><p>可选绑定 </p>
+<p>  在默认情况下， @bind和监听器的绑定都是必须的，如果目标view没有找到的话，Butter Knife将会抛出个异常。</p>
+<p>  如果你并不想使用这样的默认行为而是想创建一个可选的绑定，那么你只需要在变量上使用@Nullable注解或在函数上使用@Option注解。 </p>
+</li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>1.在Activity中 ButterKnife.bind(this);必须在setContentView()之后，且父类bind绑定后，子类不需要再bind
+2.在Fragment中使用 ButterKnife.bind(this, mRootView);
+3.属性布局不能用private or static 修饰，否则会报错
+4.setContentView() 不能通过注解实现。
+5.ButterKnife已经更新到版本8.0.7了，以前的版本中叫做@InjectView了，而现在改用叫@Bind，更加贴合语义。
+6.在Fragment生命周期中，onDestoryView也需要Butterknife.unbind(this)
+</code></pre><h2 id="代码生成技术探索"><a href="#代码生成技术探索" class="headerlink" title="代码生成技术探索"></a>代码生成技术探索</h2><p>从上面的使用我们可以看出，一个注解就可以将相关联的代码自动生成如demo中的实现了Unbinder接口的MainActivity_ViewBinding文件(build/generated/source/apt/)。这里涉及到3个核心技术 </p>
+<ul>
+<li>编译期注解</li>
+<li>APT(注解处理器)</li>
+<li>javaPoet(自动生成代码) </li>
+</ul>
+<p>在分析ButterKnife源码之前首先需要了解以上3个技术点，下面将逐一介绍这三个技术点，最后再聊聊注解  </p>
+<p><img src="https://i.imgur.com/5dVs8Ib.png" alt="image">  </p>
+<h3 id="Java自带的注解"><a href="#Java自带的注解" class="headerlink" title="Java自带的注解"></a>Java自带的注解</h3><ul>
+<li>元注解</li>
+<li><p>普通注解</p>
+<blockquote>
+<p>元注解(meta-annotation) </p>
+</blockquote>
+<p>  翻译一下就是“注解的注解”,即注解用来注解其他注解的注解，公有4个，常用于自定义注解</p>
+</li>
+<li><p>@Target </p>
+<p>  Target描述了这个注解的使用范围，使用方法如@Target(ElementType.TYPE)，ElementType的取值有七种，如下：</p>
+<pre><code>1.ElemenetType.CONSTRUCTOR 构造器声明
+2.ElemenetType.FIELD 域声明(包括 enum 实例)
+3.ElemenetType.LOCAL_VARIABLE 局部变量声明
+4.ElemenetType.METHOD 方法声明
+5.ElemenetType.PACKAGE 包声明
+6.ElemenetType.PARAMETER 参数声明
+7.ElemenetType.TYPE 类，接口(包括注解类型)或enum声明
+</code></pre></li>
+<li><p>@Retention  </p>
+<p>  Retention用来描述这个注解的生命周期,英文意思为“保留、保持”、，即注解的“存活时间”，使用方法如下 </p>
+<pre><code>@Retention(RetentionPolicy.RUNTIME) 
+</code></pre><p>  保存策略总共有3种 </p>
+<pre><code>SOURCE:  Annotation只保留在原代码中，当编译器编译的时候就会抛弃它。（即源文件保留）
+CLASS:   编译器将把Annotation记录在Class文件中，不过当java程序执行的时候，JVM将抛弃它。（即class保留）
+RUNTIME: 在Retationpolicy.CLASS的基础上，JVM执行的时候也不会抛弃它，所以我们一般在程序中可以通过反射来获得这个注解，然后进行处理。  
+</code></pre><p>  Tips： </p>
+<ul>
+<li><p>我们知道，Java代码会有源代码(java)经过编译器编译成class文件(二进制字节码)，然后由JVM虚拟机去解释执行，Retention用于描述注解在这个阶段存活的时间，因此根据注解不同的生命周期会有不同的处理注解的方式，这一点非常重要。之前注解往往被人诟病使用反射速度慢，其实使用的是Runtime策略的注解，而butterKnife一些使用的是class策略的注解，仅仅会影响编译期速度，但是由于仅仅保存在字节码中，因此需要通过其他的手段把注解信息保留下来传递到虚拟机去执行，通常使用的是自定义注解处理器 </p>
+</li>
+<li><p>首先要明确生命周期长度 SOURCE &lt; CLASS &lt; RUNTIME ，所以前者能作用的地方后者一定也能作用。一般如果需要在运行时去动态获取注解信息，那只能用 RUNTIME 注解；如果要在编译时进行一些预处理操作，比如生成一些辅助代码（如 ButterKnife），就用 CLASS注解；如果只是做一些检查性的操作，比如 @Override 和 @SuppressWarnings，则可选用 SOURCE 注解。 </p>
+<p><img src="http://dl.iteye.com/upload/attachment/0084/2313/9df89177-114a-343a-bfe0-672739b33ed6.png?_=5398610" alt="image"></p>
+</li>
+<li><p>@Document </p>
+<p>  Document标记这个注解应该被 javadoc工具记录。默认情况下，Javadoc是不包括注解的。</p>
+</li>
+<li><p>@Inherited  </p>
+<p>  Inherited译为可继承的，如果一个使用了@Inherited 修饰的 annotation类型 被用于一个 class，则这个 annotation 将被用于该class的子类。</p>
+<blockquote>
+<p>普通注解  </p>
+</blockquote>
+<p>  用于描述代码的注解 </p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h3><p>通过使用元注解可以实现我们自己的注解，使用@interface自定义注解时，不能继承其他的注解或接口。@interface用来声明一个注解，其中的每一个方法实际上是声明了一个配置参数。方法的名称就是参数的名称，返回值类型就是参数的类型，其中可以通过default来声明参数的默认值。，看下butterknife中的自定义注解BindeView</p>
+<p><pre class="”brush:" java;="" gutter:="" true;”=""><br>    @Retention(CLASS) @Target(FIELD)<br>    public @interface BindView {<br>      /<em>* View ID to which the field will be bound. </em>/<br>      @IdRes int value();<br>    }<br></pre><br>使用 </p>
+<pre><code>@BindView(R.id.title) TextView title;
+</code></pre><p>自定义注解器需要继承AbstractProcessor，然后实现如下重要方法： </p>
+<ul>
+<li>init() 初始化，得到Elements、Types、Filer等工具类 <ul>
+<li>getSupportedAnnotationTypes() 描述注解处理器需要处理的注解 </li>
+<li>process() 扫描分析注解，生成代码</li>
+</ul>
+</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li><p>本篇博文主要依托butetrknife框架，介绍它的使用，在分析源码之前铺垫了其核心技术，注解的一些高级玩法、自定义注解处理器、javapoet自动生成代码，进而深入分析了butterknife源码；</p>
+</li>
+<li><p>其中apt+javaPoet目前也是应用比较广泛，在一些大的开源库，如EventBus3.0+,页面路由 ARout、Dagger、Retrofit等均有使用的身影</p>
+</li>
+<li><p>注解不仅仅是通过反射一种方式来使用，也可以使用APT在编译期处理</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/11/好用的Android开发者工具/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1009,7 +1325,7 @@ private static void rceycleBitmapDrawable(BitmapDrawable bitmapDrawable) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>

@@ -181,7 +181,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Accueil
           </a>
         </li>
       
@@ -191,7 +191,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -214,6 +214,262 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/Gradle实现高效打包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bob Stones">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog For Bean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/13/Gradle实现高效打包/" itemprop="url">借助gradle实现高效打包发包</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-13T10:17:01+08:00">
+                2017-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在开发的过程中，很多时候完成了一个功能的开发，往往需要打包给测试进行测试，之前就是打个包，要么是通过USB进行安装，要么就是打个包通过QQ给测试发送过去，后来接触到Jenkins，发现可以进行持续集成，但是很多时候往往只是改了一个很小的功能，比如说字体，或者颜色之类的，Jenkins就有点大材小用了，这个时候，总想着要是能够通过脚本进行自动打包上传至服务器并且生成一个下载的二维码就好了，最近学习了Python并且也接触了fir这个第三方托管工具，发现，梦想还是要有的，万一实现了呢?下面介绍一下如果利用Python跟fir这两个工具来实现梦想的。</p>
+<p>作者：wustor<br>链接：<a href="https://juejin.im/post/5a0675b851882531d016ded1" target="_blank" rel="external">https://juejin.im/post/5a0675b851882531d016ded1</a><br>来源：掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h3 id="关于Python"><a href="#关于Python" class="headerlink" title="关于Python"></a>关于Python</h3><p>Python是一门高级编程语言，而且是一门动态语言，可以用来编写各种脚本来帮助人们从一些重复性的操作中解放出来，当然也可以用来开发网站，不过实现Python的自动打包上传只需要准备：  </p>
+<ul>
+<li>了解基本的Python语法</li>
+<li>熟悉Requests这个网络库 </li>
+</ul>
+<h3 id="关于fir"><a href="#关于fir" class="headerlink" title="关于fir"></a>关于fir</h3><p>fir是一个第三方的托管网站， fir.im 为开发者提供测试应用极速发布，应用崩溃实时分析、用户反馈收集等一系列开发测试效率工具服务，所以需要准备的是   </p>
+<ul>
+<li>注册一个fir账号</li>
+<li>了解fir对外提供的API </li>
+</ul>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="注册fir账号"><a href="#注册fir账号" class="headerlink" title="注册fir账号"></a>注册fir账号</h3><p>fir的注册地址是<a href="https://account.fir.im/users/sign_up" target="_blank" rel="external">fir注册地址</a>，不过免费的应用每天提供的免费下载次数是100次</p>
+<h3 id="配置Python运行环境"><a href="#配置Python运行环境" class="headerlink" title="配置Python运行环境"></a>配置Python运行环境</h3><p>Python现在大致分为两个大的版本：2.X以及3.X,不过Python的3.X版本有些语法是不向下兼容的，由于对Python不是很熟悉，所以还是选择了2.7版本来配置环境，官网下载地址是Python官网，我是Windows系统，所以下载的安装包，然后下载了一个编辑Python的IDE名字是PyCharm，之所以选择IDE没有用SublimeText等文本编辑器是因为windows下的环境配置比较麻烦，而且刚开始有IDE的提示不至于在一些小问题上卡壳，当然如果你愿意去配置文本编辑器，我推荐SublimeText，提供了很多插件。</p>
+<h3 id="编写Python脚本"><a href="#编写Python脚本" class="headerlink" title="编写Python脚本"></a>编写Python脚本</h3><p>获取上传地址</p>
+<h3 id="服务器地址：api-fir-im-apps"><a href="#服务器地址：api-fir-im-apps" class="headerlink" title="服务器地址：api.fir.im/apps()"></a>服务器地址：api.fir.im/apps()</h3><h3 id="参数列表"><a href="#参数列表" class="headerlink" title="参数列表"></a>参数列表</h3><p><img src="http://upload-images.jianshu.io/upload_images/3794407-b97d7dcb653c88f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="Postman调试"><a href="#Postman调试" class="headerlink" title="Postman调试"></a>Postman调试</h3><p><img src="https://user-gold-cdn.xitu.io/2017/11/11/8bde0a7ff7410f34f9a10db2de7d457c?imageView2/0/w/1280/h/960/ignore-error/1" alt="image"></p>
+<h3 id="Python脚本编写"><a href="#Python脚本编写" class="headerlink" title="Python脚本编写"></a>Python脚本编写</h3><p><img src="http://upload-images.jianshu.io/upload_images/3794407-11c5f4581e57a219.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h3><p><img src="http://upload-images.jianshu.io/upload_images/3794407-1a417047ec5d405c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="上传apk"><a href="#上传apk" class="headerlink" title="上传apk"></a>上传apk</h3><p>服务器地址：upload_url</p>
+<blockquote>
+<p>binary字段对应的binary  </p>
+</blockquote>
+<h3 id="参数列表-1"><a href="#参数列表-1" class="headerlink" title="参数列表"></a>参数列表</h3><p><img src="http://upload-images.jianshu.io/upload_images/3794407-dc3e8f2c1af080f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="Postman进行测试"><a href="#Postman进行测试" class="headerlink" title="Postman进行测试"></a>Postman进行测试</h3><p><img src="https://user-gold-cdn.xitu.io/2017/11/11/7a6fa42b57de00d11444e2c193bfc1ab?imageView2/0/w/1280/h/960/ignore-error/1" alt="image"></p>
+<h3 id="Python脚本编写-1"><a href="#Python脚本编写-1" class="headerlink" title="Python脚本编写"></a>Python脚本编写</h3><p><img src="http://upload-images.jianshu.io/upload_images/3794407-3a55b1db4d70777b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="运行测试-1"><a href="#运行测试-1" class="headerlink" title="运行测试"></a>运行测试</h3><pre><code>{&quot;is_completed&quot;:true}
+</code></pre><h3 id="在fir界面查看结果"><a href="#在fir界面查看结果" class="headerlink" title="在fir界面查看结果"></a>在fir界面查看结果</h3><p><img src="https://user-gold-cdn.xitu.io/2017/11/11/b4169bfc8b302c166073155d708d0a6f?imageView2/0/w/1280/h/960/ignore-error/1" alt="image"><br>界面显示已经上传成功，但是发现没有Logo,我开始以为他会自动提取apk中的logo，实际上并没有，但是它提供了上传logo的接口，现在来继续上传logo</p>
+<h3 id="上传应用图标"><a href="#上传应用图标" class="headerlink" title="上传应用图标"></a>上传应用图标</h3><p>服务器地址：upload_url</p>
+<blockquote>
+<p>icon字段对应的upload_url</p>
+<h3 id="参数列表-2"><a href="#参数列表-2" class="headerlink" title="参数列表"></a>参数列表</h3></blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3794407-efd2f41a971d2e03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="Postman测试"><a href="#Postman测试" class="headerlink" title="Postman测试"></a>Postman测试</h3><p><img src="https://user-gold-cdn.xitu.io/2017/11/11/1c622197477774e86f6187603182acef?imageView2/0/w/1280/h/960/ignore-error/1" alt="image"></p>
+<h3 id="fir查看上传结果"><a href="#fir查看上传结果" class="headerlink" title="fir查看上传结果"></a>fir查看上传结果</h3><p><img src="https://user-gold-cdn.xitu.io/2017/11/11/690a4ea323bdcc8b328fbaa9ba629a2c?imageView2/0/w/1280/h/960/ignore-error/1" alt="image"></p>
+<blockquote>
+<p>这里用了一张微信朋友圈的logo上传，已经成功替换。  </p>
+</blockquote>
+<h3 id="编写Python脚本-1"><a href="#编写Python脚本-1" class="headerlink" title="编写Python脚本"></a>编写Python脚本</h3><p><img src="http://upload-images.jianshu.io/upload_images/3794407-64e0fba55c6c0b66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><pre><code>{&quot;is_completed&quot;:true}
+</code></pre><h3 id="编写gradle脚本"><a href="#编写gradle脚本" class="headerlink" title="编写gradle脚本"></a>编写gradle脚本</h3><pre><code>task debugToFir {
+    dependsOn &apos;assembleDebug&apos;
+    doLast {
+        def upUrl = &quot;http://api.fir.im/apps&quot;
+        def appName = &quot;Python2&quot;
+        def bundleId = project.android.defaultConfig.applicationId
+        def verName = project.android.defaultConfig.versionName
+        def apiToken = &quot;9812fa28e4dac156673a5e45e7119631&quot;
+        def iconPath = &quot;F:/PythoPackage/app/src/main/res/mipmap-xxhdpi/ic_launcher.png&quot;
+        def apkPath = &quot;F:/PythoPackage/app/build/outputs/apk/debug/app-debug.apk&quot;
+        def buildNumber = project.android.defaultConfig.versionCode
+        def changeLog = &quot;版本更新日志&quot;
+        //执行Python脚本
+        def process = &quot;python upToFir.py ${upUrl} ${appName} ${bundleId} ${verName} ${apiToken} ${iconPath} ${apkPath} ${buildNumber} ${changeLog}&quot;.execute()
+        println(&quot;开始上传至fir&quot;)
+        //获取Python脚本日志，便于出错调试
+        ByteArrayOutputStream result = new ByteArrayOutputStream()
+        def inputStream = process.getInputStream()
+        byte[] buffer = new byte[1024]
+        int length
+        while ((length = inputStream.read(buffer)) != -1) {
+            result.write(buffer, 0, length)
+        }
+        println(result.toString(&quot;UTF-8&quot;))
+        println &quot;上传结束 &quot;
+    }
+}
+</code></pre><blockquote>
+<p>该脚本放在app/build.gradle中的android目录下</p>
+</blockquote>
+<h3 id="统一Python脚本"><a href="#统一Python脚本" class="headerlink" title="统一Python脚本"></a>统一Python脚本</h3><h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="coding=utf-8"></a>coding=utf-8</h1><h1 id="encoding-utf-8"><a href="#encoding-utf-8" class="headerlink" title="encoding = utf-8"></a>encoding = utf-8</h1><p>import requests<br>import sys<br>def upToFir():</p>
+<pre><code># 打印传递过来的参数数组长度，便于校验
+print &apos;the argLength---&gt;:&apos; + len(sys.argv)
+upUrl = sys.argv[1]
+appName = sys.argv[2]
+bundleId = sys.argv[3]
+verName = sys.argv[4]
+apiToken = sys.argv[5]
+iconPath = sys.argv[6]
+apkPath = sys.argv[7]
+buildNumber = sys.argv[8]
+changeLog = sys.argv[9]
+queryData = {&apos;type&apos;: &apos;android&apos;, &apos;bundle_id&apos;: bundleId, &apos;api_token&apos;: apiToken}
+iconDict = {}
+binaryDict = {}
+# 获取上传信息
+try:
+    response = requests.post(url=upUrl, data=queryData)
+    json = response.json()
+    iconDict = (json[&quot;cert&quot;][&quot;icon&quot;])
+    binaryDict = (json[&quot;cert&quot;][&quot;binary&quot;])
+except Exception as e:
+    print(&apos;query:&apos; + e)
+
+# 上传apk
+try:
+    file = {&apos;file&apos;: open(apkPath, &apos;rb&apos;)}
+    param = {&quot;key&quot;: binaryDict[&apos;key&apos;],
+             &apos;token&apos;: binaryDict[&apos;token&apos;],
+             &quot;x:name&quot;: appName,
+             &quot;x:version&quot;: verName,
+             &quot;x:build&quot;: buildNumber,
+             &quot;x:changelog&quot;: changeLog}
+    req = requests.post(url=binaryDict[&apos;upload_url&apos;], files=file, data=param, verify=False)
+    print &apos;success_apk:&apos; + req.content
+except Exception as e:
+    print&apos;error_apk:&apos; + e
+
+# 上传logo
+try:
+    file = {&apos;file&apos;: open(iconPath, &apos;rb&apos;)}
+    param = {&quot;key&quot;: iconDict[&apos;key&apos;],
+             &apos;token&apos;: iconDict[&apos;token&apos;]}
+    req = requests.post(url=iconDict[&apos;upload_url&apos;], files=file, data=param, verify=False)
+    print &apos;success_icon:&apos; + req.content
+except Exception as e:
+    print&apos;error_icon:&apos; + e
+
+if __name__ == &apos;__main__&apos;:
+upToFir()
+</code></pre><blockquote>
+<p>前面的三个python脚本的参数都是写死的，所以需要改变成动态从gradle中获取，获取的时候先判断一下数组长度，看看是不是跟之前约定的一样</p>
+</blockquote>
+<h3 id="整体进行测试"><a href="#整体进行测试" class="headerlink" title="整体进行测试"></a>整体进行测试</h3><p>这个时候修改一下apk的一些参数，跟logo</p>
+<pre><code> versionCode 3
+ versionName &quot;1.2&quot;
+ iconPath=ic_launcher.png
+appName=&quot;python&quot;
+</code></pre><p> 执行gradle命令 gradlew debugToFir，运行结果</p>
+<pre><code>开始上传至fir
+http://api.fir.im/apps
+success_apk:{&quot;is_completed&quot;:true}
+success_icon:{&quot;is_completed&quot;:true}
+上传结束 with value 0
+</code></pre><p>运行成功，到官网查看结果</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/11/dd6f79ab7d721b41b8c3e4cd4b14c47c?imageView2/0/w/1280/h/960/ignore-error/1" alt="image"><br>完美，简单，以后简单的打包就用一行代码就可以搞定了，吼吼。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>其实Python的语法很简洁，作为一门动态语言，不需要像Java定义各种类型变量，gradle的语法其实也一样，掌握这两种语言的基本用法，有助于更高效的开发Android。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -257,7 +513,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-11T16:55:00+08:00">
                 2017-11-11
@@ -573,7 +829,7 @@ RUNTIME: 在Retationpolicy.CLASS的基础上，JVM执行的时候也不会抛弃
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-11T11:42:05+08:00">
                 2017-11-11
@@ -712,7 +968,7 @@ RUNTIME: 在Retationpolicy.CLASS的基础上，JVM执行的时候也不会抛弃
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-11T10:08:05+08:00">
                 2017-11-11
@@ -912,7 +1168,7 @@ private static void rceycleBitmapDrawable(BitmapDrawable bitmapDrawable) {
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-10T18:09:14+08:00">
                 2017-11-10
@@ -1049,7 +1305,7 @@ private static void rceycleBitmapDrawable(BitmapDrawable bitmapDrawable) {
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-10T10:23:44+08:00">
                 2017-11-10
@@ -1193,7 +1449,7 @@ private static void rceycleBitmapDrawable(BitmapDrawable bitmapDrawable) {
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-10T09:42:11+08:00">
                 2017-11-10
@@ -1325,8 +1581,8 @@ private static void rceycleBitmapDrawable(BitmapDrawable bitmapDrawable) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">articles</span>
                 </a>
               </div>
             
@@ -1383,7 +1639,7 @@ private static void rceycleBitmapDrawable(BitmapDrawable bitmapDrawable) {
 </span>
 </div>
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -1391,7 +1647,7 @@ private static void rceycleBitmapDrawable(BitmapDrawable bitmapDrawable) {
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+  <div class="theme-info">Thème &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
 
 
 

@@ -79,16 +79,21 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="简评：应用的大小也是用户体验的一个重要方面，而减少 Android 应用安装包大小其实一点也不复杂。   对于移动应用来说，应用安装包的大小当然是越小越好。特别是对于一些欠发达地区，你不希望用户因为手机「存储空间不足」而卸载你的应用。  本文就介绍了几个小技巧来有效减少 apk 的大小：首先，我们先用 Android Studio 提供的 APK Analyser 工具来分析下我们的 apk 文">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/11/10/hello-world/index.html">
+<meta property="og:title" content="怎样减少 Android 应用包 60% 的大小？">
+<meta property="og:url" content="http://yoursite.com/2017/11/15/怎样减少 Android 应用包 60% 的大小/index.html">
 <meta property="og:site_name" content="Blog For Bean">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-11-10T01:42:11.000Z">
+<meta property="og:description" content="简评：应用的大小也是用户体验的一个重要方面，而减少 Android 应用安装包大小其实一点也不复杂。   对于移动应用来说，应用安装包的大小当然是越小越好。特别是对于一些欠发达地区，你不希望用户因为手机「存储空间不足」而卸载你的应用。  本文就介绍了几个小技巧来有效减少 apk 的大小：首先，我们先用 Android Studio 提供的 APK Analyser 工具来分析下我们的 apk 文">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3794407-a75fa7edc2c670c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3794407-e9e3fbdb5525cb80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3794407-8a8ad4c0cb54bc27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3794407-51906836e0d018a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-11-15T07:12:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="怎样减少 Android 应用包 60% 的大小？">
+<meta name="twitter:description" content="简评：应用的大小也是用户体验的一个重要方面，而减少 Android 应用安装包大小其实一点也不复杂。   对于移动应用来说，应用安装包的大小当然是越小越好。特别是对于一些欠发达地区，你不希望用户因为手机「存储空间不足」而卸载你的应用。  本文就介绍了几个小技巧来有效减少 apk 的大小：首先，我们先用 Android Studio 提供的 APK Analyser 工具来分析下我们的 apk 文">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3794407-a75fa7edc2c670c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -118,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/10/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/15/怎样减少 Android 应用包 60% 的大小/"/>
 
 
 
 
 
-  <title>Hello World | Blog For Bean</title>
+  <title>怎样减少 Android 应用包 60% 的大小？ | Blog For Bean</title>
   
 
 
@@ -231,7 +236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/10/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/15/怎样减少 Android 应用包 60% 的大小/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bob Stones">
@@ -248,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">怎样减少 Android 应用包 60% 的大小？</h1>
         
 
         <div class="post-meta">
@@ -260,8 +265,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-10T09:42:11+08:00">
-                2017-11-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-15T15:12:18+08:00">
+                2017-11-15
               </time>
             
 
@@ -298,15 +303,56 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <blockquote>
+<p>简评：应用的大小也是用户体验的一个重要方面，而减少 Android 应用安装包大小其实一点也不复杂。 </p>
+</blockquote>
+<p>对于移动应用来说，应用安装包的大小当然是越小越好。特别是对于一些欠发达地区，你不希望用户因为手机「存储空间不足」而卸载你的应用。 </p>
+<p>本文就介绍了几个小技巧来有效减少 apk 的大小：<br>首先，我们先用 Android Studio 提供的 APK Analyser 工具来分析下我们的 apk 文件： </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3794407-a75fa7edc2c670c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>可以看到占空间最多的主要是三个部分：classes.dex, res 和 resources.arsc。 </p>
+<ul>
+<li>classes.dex：包含有 Java 代码的字节码文件。</li>
+<li>res：包含了资源文件，比如图片、布局文件等等。</li>
+<li>resources.arsc：包含所有的值资源文件，如 strings, dimensions, styles, integers 等等。 </li>
+</ul>
+<h2 id="classes-dex"><a href="#classes-dex" class="headerlink" title="classes.dex"></a>classes.dex</h2><p>classes.dex 文件的大小完全取决于程序中方法数的多少。在上面展示的例子中，包含了 4392 个类和 29897 个方法。这个结果是默认没有使用 proguard 的。我们有两个默认的 proguard 文件可以使用： </p>
+<ul>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fandroid.googlesource.com%2Fplatform%2Fsdk%2F%2B%2Fmaster%2Ffiles%2Fproguard-android-optimize.txt" target="_blank" rel="external">proguard-android-optimize.txt</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fandroid.googlesource.com%2Fplatform%2Fsdk%2F%2B%2Fmaster%2Ffiles%2Fproguard-android.txt" target="_blank" rel="external">proguard-android.txt</a></li>
+</ul>
+<p>从名字上就可以看出，proguard-android-optimize.txt 是更加激进的 proguard 配置，包括和 proguard-android.txt 相同的 ProGuard 规则，但还包括其他在字节码一级（方法内和方法间）执行分析的优化，以进一步减小 APK 大小和帮助提高其运行速度。 </p>
+<p>可以像这样来使用：</p>
+<pre><code>release {
+    //Enable the proguard
+    minifyEnabled true
+    proguardFiles getDefaultProguardFile(&apos;proguard-android-optimize.txt&apos;),         &quot;proguard-rules.pro&quot;
+
+    //Other parameters
+    debuggable false
+    jniDebuggable false
+    renderscriptDebuggable false
+    signingConfig playStoreConfig //Add your own signing config
+    pseudoLocalesEnabled false
+    zipAlignEnabled true
+}  
+</code></pre><p>通过设置 minifyEnabled 属性为 true，会告诉 proguard 删除所有未使用的方法和指令，进一步的减少 .dex 文件的大小。<br><img src="http://upload-images.jianshu.io/upload_images/3794407-e9e3fbdb5525cb80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>方法数从 29897 减少到了 15168，大小从 3.1MB 减少到了 1.98 MB。 </p>
+<h2 id="res"><a href="#res" class="headerlink" title="res"></a>res</h2><p>对于 res 文件夹，通常占空间最大的就是图片了。如果你的 Android Studio 为 2.3，并且项目的 minimum version 为 18 或以上，应该使用 webp 而不是 png 图片。webp 图片有更小的体积，图片质量还没有什么损失。 </p>
+<p>我们可以选中 drawable 和 mipmap 文件夹，右键后选择 convert to webp，将图片转为 webp 格式。<br><img src="http://upload-images.jianshu.io/upload_images/3794407-8a8ad4c0cb54bc27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>转换的结果：<br><img src="http://upload-images.jianshu.io/upload_images/3794407-51906836e0d018a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>我们还可以在 build.gradle 中设置 shrinkResources 属性为 true，这会在打包时删除未使用的资源：</p>
+<pre><code>release{
+      //...
+      //...
+      shrinkResources true
+      //...
+} 
+</code></pre><p>另外如果你的应用不需要支持国际化，那么可以设置 resConfigs 为 “zh”,”en”，即只支持中英文：  </p>
+<pre><code>defaultConfig {
+    //...
+    //...
+    //...
+
+    resConfigs &quot;zh&quot;,&quot;en&quot;
+} 
+</code></pre><p>这么做是因为对于官方的 support library，默认是支持国际化的，也就是包含了很多不同语言的资源文件，我们就可以通过这样设置来移除用不到的语言资源文件。 </p>
+<p>通过上面的设置，这个 App 的安装包大小从 3.19MB 减少到了 1.89MB。当然还有很多其他的减少 apk 大小的技巧，但这里介绍的技巧是完全可以作为你项目的默认设置。</p>
 
       
     </div>
@@ -331,15 +377,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/11/13/Gradle实现高效打包/" rel="next" title="借助gradle实现高效打包发包">
+                <i class="fa fa-chevron-left"></i> 借助gradle实现高效打包发包
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/10/搭建个人HEXO/" rel="prev" title="快速搭建HEXO博客">
-                快速搭建HEXO博客 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -455,7 +501,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#classes-dex"><span class="nav-number">1.</span> <span class="nav-text">classes.dex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#res"><span class="nav-number">2.</span> <span class="nav-text">res</span></a></li></ol></div>
             
 
           </div>
